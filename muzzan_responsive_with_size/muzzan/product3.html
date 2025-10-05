@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MUZZAN Premium Shoes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+    }
+
+    /* Product Layout */
+    .product-page {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      max-width: 1100px;
+      margin: auto;
+      gap: 30px;
+    }
+
+    .product-image {
+      flex: 1 1 45%;
+      text-align: center;
+    }
+
+    .product-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .product-details {
+      flex: 1 1 45%;
+      padding: 20px 40px;
+    }
+
+    .product-details h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      color: #E91E63;
+      font-size: 28px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .description {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .buy-now-btn {
+      background-color: #E91E63;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 14px 40px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .buy-now-btn:hover {
+      background-color: #c2185b;
+    }
+
+    .note {
+      color: gray;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    /* Popup Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: #fff;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 450px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .close {
+      float: right;
+      font-size: 22px;
+      cursor: pointer;
+      color: #555;
+    }
+
+    .modal h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .modal label {
+      display: block;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    .modal input,
+    .modal textarea,
+    .modal select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .whatsapp-btn {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .whatsapp-btn:hover {
+      background: #1EBE5B;
+    }
+
+    @media (max-width: 768px) {
+      .product-page {
+        flex-direction: column;
+      }
+      .product-details {
+        padding: 20px;
+      }
+      .product-details h2 {
+        font-size: 22px;
+      }
+      .price {
+        font-size: 22px;
+      }
+      .buy-now-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="imges/logo.png" alt="Logo" class="logo" style="height:50px;margin-right:10px;">
+    <span class="brand-name" style="font-size:22px;font-weight:700;">MUZZAN</span>
+  </header>
+
+  <!-- Product Section -->
+  <div class="product-page">
+    <div class="product-image">
+      <img src="imges/Gemini_Generated_Image_twvmgbtwvmgbtwvm.png" alt="MUZZAN Premium Shoes">
+    </div>
+
+    <div class="product-details">
+      <h2>MUZZAN Premium Shoes</h2>
+      <p class="price">RS:2,750</p>
+      <p class="description">
+        Experience premium quality and exceptional comfort with our carefully crafted footwear. 
+        Each pair is designed with attention to detail, ensuring both style and durability.
+      </p>
+      <button class="buy-now-btn" id="buyNowBtn">🛒 Buy Now</button>
+      <p class="note">Free shipping on all orders | Easy returns</p>
+    </div>
+  </div>
+
+  <!-- Popup Modal -->
+  <div class="modal" id="orderModal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h3>Complete Your Order</h3>
+
+      <label for="custName">Full Name</label>
+      <input type="text" id="custName" placeholder="Enter your name" required>
+
+      <label for="custPhone">Phone Number</label>
+      <input type="tel" id="custPhone" placeholder="03XXXXXXXXX" required>
+
+      <label for="custAddress">Address</label>
+      <textarea id="custAddress" rows="3" placeholder="Enter your full address" required></textarea>
+
+      <label for="custSize">Select Shoe Size</label>
+      <select id="custSize" required>
+        <option value="">Select Size</option>
+        <option value="40">40</option>
+        <option value="41">41</option>
+        <option value="42">42</option>
+        <option value="43">43</option>
+        <option value="44">44</option>
+        <option value="45">45</option>
+      </select>
+
+      <button class="whatsapp-btn" id="sendOrderBtn">📲 Send Order on WhatsApp</button>
+    </div>
+  </div>
+
+  <script>
+    const buyNowBtn = document.getElementById("buyNowBtn");
+    const orderModal = document.getElementById("orderModal");
+    const closeModal = document.getElementById("closeModal");
+    const sendOrderBtn = document.getElementById("sendOrderBtn");
+
+    const whatsappNumber = "923136375319"; // Replace with your WhatsApp number (no spaces)
+
+    buyNowBtn.onclick = () => orderModal.style.display = "flex";
+    closeModal.onclick = () => orderModal.style.display = "none";
+    window.onclick = e => { if (e.target === orderModal) orderModal.style.display = "none"; };
+
+    sendOrderBtn.onclick = () => {
+      const name = document.getElementById("custName").value.trim();
+      const phone = document.getElementById("custPhone").value.trim();
+      const address = document.getElementById("custAddress").value.trim();
+      const size = document.getElementById("custSize").value.trim();
+
+      if (!name || !phone || !address || !size) {
+        alert("⚠️ Please fill all details before sending!");
+        return;
+      }
+
+      const message =
+        `🛍️ *New Order Received!*%0A%0A` +
+        `👤 Name: ${name}%0A` +
+        `📞 Phone: ${phone}%0A` +
+        `🏠 Address: ${address}%0A` +
+        `👟 Shoe Size: ${size}%0A` +
+        `🛒 Product: MUZZAN Premium Shoes%0A` +
+        `💰 Price: RS 2,750`;
+
+      const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
+      window.open(whatsappURL, "_blank");
+    };
+  </script>
+
+</body>
+</html>
